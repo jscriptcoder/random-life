@@ -3,7 +3,6 @@ module Components.Grid exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (class, classList)
 import Matrix exposing (Matrix)
-import List exposing (..)
 import Components.Cell as Cell
 
 
@@ -12,8 +11,7 @@ type alias Model =
 
 
 type Msg
-    = NoOp
-    | CellMsg Cell.Msg
+    = CellMsg Cell.Msg
 
 
 init : Int -> Model
@@ -36,10 +34,5 @@ mapRow row =
 
 mapCell : Cell.Model -> Html Msg
 mapCell cell =
-    div
-        [ classList
-            [ ( "cell", True )
-            , ( "is-alive", cell.alive )
-            ]
-        ]
-        []
+    Cell.view cell
+        |> Html.map CellMsg

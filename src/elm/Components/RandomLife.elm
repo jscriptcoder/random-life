@@ -6,7 +6,9 @@ import Components.Grid as Grid
 
 
 type alias Model =
-    { grid : Grid.Model }
+    { playing : Bool
+    , grid : Grid.Model
+    }
 
 
 type Msg
@@ -16,15 +18,17 @@ type Msg
 
 init : Int -> ( Model, Cmd Msg )
 init size =
-    ( { grid = Grid.init size }, Cmd.none )
+    ( { playing = False
+      , grid = Grid.init size
+      }
+    , Cmd.none
+    )
 
 
 view : Model -> Html Msg
 view model =
     div [ class "random-life" ]
-        [ Grid.view model.grid
-            |> Html.map GridMsg
-        ]
+        [ Grid.view model.grid |> Html.map GridMsg ]
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
