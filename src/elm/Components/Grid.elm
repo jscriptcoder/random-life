@@ -23,6 +23,7 @@ view : Model -> Html Msg
 view model =
     Matrix.toList model
         |> List.map mapRow
+        |> (::) (div [ class "mask" ] [])
         |> div [ class "grid" ]
 
 

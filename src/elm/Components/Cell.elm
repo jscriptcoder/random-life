@@ -2,7 +2,7 @@ module Components.Cell exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (classList)
-import Html.Events exposing (onClick)
+import Html.Events exposing (onClick, onMouseDown)
 import Matrix exposing (Location)
 
 
@@ -30,7 +30,7 @@ view model =
             [ ( "cell", True )
             , ( "is-alive", model.alive )
             ]
-        , onClick (Toggle model)
+        , onMouseDown (Toggle model)
         ]
         []
 
