@@ -3,19 +3,24 @@ module Components.Cell exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (classList)
 import Html.Events exposing (onClick)
+import Matrix exposing (Location)
 
 
 type alias Model =
-    { alive : Bool }
+    { loc : Location
+    , alive : Bool
+    }
 
 
 type Msg
-    = Toggle
+    = Toggle Model
 
 
-model : Model
-model =
-    { alive = False }
+init : Location -> Bool -> Model
+init loc alive =
+    { loc = loc
+    , alive = alive
+    }
 
 
 view : Model -> Html Msg
@@ -25,13 +30,13 @@ view model =
             [ ( "cell", True )
             , ( "is-alive", model.alive )
             ]
-        , onClick Toggle
+        , onClick (Toggle model)
         ]
         []
 
 
-update : Msg -> Model -> Model
-update msg model =
+update : Msg -> Model
+update msg =
     case msg of
-        Toggle ->
+        Toggle model ->
             { model | alive = not model.alive }

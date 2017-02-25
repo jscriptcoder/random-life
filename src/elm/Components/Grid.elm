@@ -16,7 +16,7 @@ type Msg
 
 init : Int -> Model
 init size =
-    Matrix.square size (\loc -> Cell.model)
+    Matrix.square size (\loc -> Cell.init loc False)
 
 
 view : Model -> Html Msg
@@ -36,3 +36,14 @@ mapCell : Cell.Model -> Html Msg
 mapCell cell =
     Cell.view cell
         |> Html.map CellMsg
+
+
+update : Msg -> Model -> Model
+update msg model =
+    case msg of
+        CellMsg cellMsg ->
+            let
+                newCell =
+                    Cell.update cellMsg
+            in
+                Matrix.set newCell.loc newCell model

@@ -12,8 +12,7 @@ type alias Model =
 
 
 type Msg
-    = NoOp
-    | GridMsg Grid.Msg
+    = GridMsg Grid.Msg
 
 
 init : Int -> ( Model, Cmd Msg )
@@ -33,7 +32,13 @@ view model =
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    ( model, Cmd.none )
+    case msg of
+        GridMsg gridMsg ->
+            ( { model
+                | grid = Grid.update gridMsg model.grid
+              }
+            , Cmd.none
+            )
 
 
 subscriptions : Model -> Sub Msg
