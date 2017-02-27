@@ -19,11 +19,19 @@ init size =
     Matrix.square size (\loc -> Cell.init loc False)
 
 
-view : Model -> Html Msg
-view model =
+view : Model -> Bool -> Html Msg
+view model playing =
     Matrix.toList model
         |> List.map mapRow
-        |> (::) (div [ class "mask" ] [])
+        |> (::)
+            (div
+                [ classList
+                    [ ( "mask", True )
+                    , ( "active", playing )
+                    ]
+                ]
+                []
+            )
         |> div [ class "grid" ]
 
 

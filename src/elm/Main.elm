@@ -10,5 +10,5 @@ main =
         { view = RandomLife.view
         , update = RandomLife.update
         , subscriptions = RandomLife.subscriptions
-        , init = RandomLife.init 30
+        , init = RandomLife.init 30 1
         }
